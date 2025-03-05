@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Adventure Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            background-image: url('./images/adventure_all_slides_start-index.png');
+            background-size: contain; /* Keep the entire image visible */
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow: hidden; /* Prevents scrolling */
+        }
+
+        img#spaceship {
+            position: absolute;
+            top: 50px;
+            left: -100px; /* Start offscreen */
+            width: 100px;
+            height: auto;
+            z-index: 10;
+            animation: flyAcross 2s ease-in-out forwards;
+        }
+
+        /* Animation for spaceship movement */
+        @keyframes flyAcross {
+            0% {
+                left: -100px;
+                top: 50px;
+            }
+            100% {
+                left: 80%;
+                top: 50px;
+            }
+        }
+
+        .container {
+            position: absolute;
+            bottom: 20px; /* Keep buttons visible at the bottom */
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+        }
+        .text-box {
+        /* Add bottom margin to push the buttons down */
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #00bcd4;
+            color: #000;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #008c9e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Spaceship image that will animate across the screen -->
+    <img id="spaceship" src="images/spaceship3.png" alt="Your Spaceship" />
+
+    <!-- Navigation buttons -->
+    <div class="container">
+        <button onclick="navigateTo('A')">Save the King!</button>
+        <button onclick="navigateTo('B')">Ignore and go Farting!</button>
+        <button onclick="navigateTo('C')">Determine who sent the message!</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const selectedSpaceship = localStorage.getItem('selectedSpaceship');
+            if (selectedSpaceship) {
+                document.getElementById('spaceship').src = `images/${selectedSpaceship}.png`;
+            } else {
+                console.warn('No spaceship image found in localStorage.');
+            }
+        };
+
+        function navigateTo(section) {
+            window.location.href = `${section}.html`;
+        }
+    </script>
+</body>
+</html>

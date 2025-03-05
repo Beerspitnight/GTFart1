@@ -1,0 +1,142 @@
+/carousel.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Space Adventure Image Carousel</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .carousel-container {
+            position: relative;
+            width: 800px;
+            max-width: 100%;
+            margin: 50px auto;
+            overflow: hidden;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            background-color: #111;
+        }
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+        }
+        .carousel img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            background-color: #000;
+        }
+        .button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000;
+        }
+        .select-button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Space Adventure Image Carousel</h1>
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="slide">
+                <img src="images/spaceship1.png" alt="Spaceship 1">
+                <button class="select-button" onclick="selectSpaceship('spaceship1')">Select This Spaceship</button>
+            </div>
+            <div class="slide">
+                <img src="images/spaceship2.png" alt="Spaceship 2">
+                <button class="select-button" onclick="selectSpaceship('spaceship2')">Select This Spaceship</button>
+            </div>
+            <div class="slide">
+                <img src="images/spaceship3.png" alt="Spaceship 3">
+                <button class="select-button" onclick="selectSpaceship('spaceship3')">Select This Spaceship</button>
+            </div>
+            <div class="slide">
+                <img src="images/spaceship4.png" alt="Spaceship 4">
+                <button class="select-button" onclick="selectSpaceship('spaceship4')">Select This Spaceship</button>
+            </div>
+            <div class="slide">
+                <img src="images/spaceship5.png" alt="Spaceship 5">
+                <button class="select-button" onclick="selectSpaceship('spaceship5')">Select This Spaceship</button>
+            </div>
+            <div class="slide">
+                <img src="images/spaceship6.png" alt="Spaceship 6">
+                <button class="select-button" onclick="selectSpaceship('spaceship6')">Select This Spaceship</button>
+            </div>
+        </div>
+        <button class="button prev" onclick="moveSlide(-1)">Previous</button>
+        <button class="button next" onclick="moveSlide(1)">Next</button>
+    </div>
+    <script>
+        // Initialize the current slide index
+        let currentSlide = 0;
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll('.carousel .slide');
+            const totalSlides = slides.length;
+            const carousel = document.querySelector('.carousel');
+            const slideWidth = document.querySelector('.carousel-container').clientWidth;
+
+            if (Math.abs(direction) >= totalSlides) {
+                direction = direction % totalSlides;
+            }
+
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
+
+        // Function to sanitize input
+        function sanitizeInput(input) {
+            const element = document.createElement('div');
+            element.innerText = input;
+            return element.innerHTML;
+        }
+
+        // Function to select a spaceship and store it in local storage
+        function selectSpaceship(spaceship) {
+            const sanitizedSpaceship = sanitizeInput(spaceship);
+            localStorage.setItem('selectedSpaceship', sanitizedSpaceship);
+            window.location.href = 'index1.html';
+        }
+    </script>
+</body>
+</html>

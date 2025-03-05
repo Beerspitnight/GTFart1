@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Adventure - Slide A</title>
+    <style>
+        /* Full Page Background */
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            background-image: url('./images/adventure_all_slides_B2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        /* Spaceship Animation */
+        img#spaceship {
+            position: absolute;
+            top: 50px;
+            left: -100px;
+            width: 100px;
+            height: auto;
+            z-index: 10;
+            animation: flyDiagonal 2s ease-in-out forwards;
+        }
+
+        /* Diagonal Flight Animation */
+        @keyframes flySpiral {
+            0% {
+                left: -100px;
+                top: 50px;
+            }
+            100% {
+                left: 80%;
+                top: 80%;
+            }
+        }
+
+        /* Button Container at the Bottom */
+        .container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+            z-index: 20;
+        }
+        .text-box {
+        /* Add bottom margin to push the buttons down */
+            margin-bottom: 20px;
+        }
+        /* Button Styles */
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #00bcd4;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Hover Effect */
+        button:hover {
+            background-color: #008c9e;
+            color: #fff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Spaceship Image -->
+    <img id="spaceship" src="images/default_spaceship.png" alt="Your Spaceship" />
+
+    <!-- Choice Buttons -->
+    <div class="container">
+        <button onclick="navigateTo('title')">Mission Over</button>
+    </div>
+
+    <script>
+        // Load the selected spaceship image from localStorage
+        window.onload = function() {
+            const selectedSpaceship = localStorage.getItem('selectedSpaceship');
+            if (selectedSpaceship) {
+                document.getElementById('spaceship').src = `images/${selectedSpaceship}.png`;
+            } else {
+                console.warn('No spaceship image found in localStorage.');
+            }
+        };
+
+        // Navigate to the next slide
+        function navigateTo(section) {
+            window.location.href = `${section}.html`;
+        }
+    </script>
+</body>
+</html>
+
